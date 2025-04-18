@@ -13,7 +13,7 @@ export default function HeroSection({ title, description, imageCredit, imageSrc 
     <div className="relative w-full md:w-1/2 bg-gray-900 text-white">
       <div className="absolute inset-0">
         <Image
-          src={imageSrc || "/placeholder.svg"}
+          src={imageSrc || "/images/background-join.png"}
           alt="Hero background"
           fill
           className="object-cover opacity-70"
