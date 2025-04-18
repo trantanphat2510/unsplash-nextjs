@@ -1,37 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dự án Next.js với TypeScript và Tailwind CSS
 
-## Getting Started
+Dự án này được xây dựng bằng Next.js, TypeScript và Tailwind CSS để tạo ra một website hiện đại, dễ sử dụng và có tính tương tác cao.
 
-First, run the development server:
+## Cài đặt
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Để bắt đầu sử dụng dự án, làm theo các bước dưới đây:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. **Clone dự án**:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+   ```bash
+   git clone https://github.com/trantanphat2510/unsplash-nextjs.git
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **Cài đặt các phụ thuộc**:
+   Di chuyển vào thư mục dự án và cài đặt các phụ thuộc với npm:
 
-## Learn More
+   ```bash
+   cd unsplash-nextjs
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+3. **Chạy ứng dụng**:
+   Để chạy ứng dụng trong chế độ phát triển, sử dụng lệnh:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   npm run dev
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   Sau khi lệnh chạy thành công, mở trình duyệt và truy cập vào [http://localhost:3000](http://localhost:3000) để xem ứng dụng.
 
-## Deploy on Vercel
+## Công nghệ sử dụng
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Next.js**: Framework React cho phép bạn xây dựng các ứng dụng web tối ưu hóa với khả năng render phía máy chủ.
+- **TypeScript**: Superset của JavaScript giúp phát hiện lỗi và cải thiện chất lượng mã nguồn.
+- **Tailwind CSS**: Framework CSS utility-first, giúp xây dựng giao diện nhanh chóng và dễ dàng.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# unsplash-nextjs
+## Các lệnh npm hữu ích
+
+- `npm run dev`: Chạy ứng dụng trong môi trường phát triển.
+- `npm run build`: Xây dựng ứng dụng để sản xuất.
+- `npm run start`: Chạy ứng dụng đã được build trong môi trường sản xuất.
+
+## Cấu trúc dự án
+
+Dưới đây là một cái nhìn tổng quan về cấu trúc thư mục của dự án:
