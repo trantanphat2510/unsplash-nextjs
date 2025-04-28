@@ -12,7 +12,7 @@ interface CollectionsProps {
 
 const Collections: React.FC<CollectionsProps> = ({ collections }) => {
   return (
-    <div className="w-64 p-4 bg-white rounded-lg shadow-md">
+    <div className="w-75 p-4 bg-white rounded-lg shadow-md">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold text-gray-800">Collections</h2>
         <a

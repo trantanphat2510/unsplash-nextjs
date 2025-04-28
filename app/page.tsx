@@ -3,6 +3,7 @@ import CategoryNav from "@/components/category-nav";
 import PhotoGrid from "@/components/homepage/PhotoGrid";
 import { HomeHeader } from "@/components/homepage/HomeHeader/HomeHeader";
 import Collections from "@/components/homepage/Collections/Collections";
+import TagList from "@/components/homepage/Tag/TagList";
 
 const sampleData1 = [
   {
@@ -21,11 +22,14 @@ export default function Home() {
       <Header />
       <CategoryNav />
       <div className="flex justify-center gap-6 px-4 max-w-7xl mx-auto mt-8">
-        <div className="flex-1">
+        <div className="flex-2">
           <HomeHeader />
         </div>
         <div className="flex-1">
           <Collections collections={sampleData1} />
+        </div>
+        <div className="flex-1">
+          <TagList />
         </div>
       </div>
       <div className="mt-10">
