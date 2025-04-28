@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import { Search, X } from "lucide-react"
-import { useState } from "react"
+import { Search, X } from "lucide-react";
+import { useState } from "react";
 
 export default function SearchBar() {
-  const [searchText, setSearchText] = useState("")
+  const [searchText, setSearchText] = useState("");
 
   const handleClear = () => {
-    setSearchText("")
-  }
+    setSearchText("");
+  };
 
   return (
     <div className="relative w-full">
@@ -24,11 +24,14 @@ export default function SearchBar() {
       />
       {searchText && (
         <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-          <button onClick={handleClear} className="rounded-full p-1 hover:bg-gray-200">
+          <button
+            onClick={handleClear}
+            className="rounded-full p-1 hover:bg-gray-200"
+          >
             <X className="h-4 w-4 text-gray-400" />
           </button>
         </div>
       )}
     </div>
-  )
+  );
 }
