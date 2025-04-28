@@ -20,7 +20,7 @@ const TagList: React.FC = () => {
       </div>
       <a
         href="#"
-        className="inline-block mt-3 text-sm text-gray-600 hover:text-gray-900 cursor-pointer select-none"
+        className="inline-block underline mt-3 text-sm text-gray-600 hover:text-gray-900 cursor-pointer select-none"
       >
         See trending searches
       </a>

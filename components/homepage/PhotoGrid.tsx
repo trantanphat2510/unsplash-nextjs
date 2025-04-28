@@ -94,8 +94,8 @@ export default function MasonryPhotoGrid() {
 
   return (
     <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="flex flex-row gap-1">
-        <div className="w-1/4 flex flex-col gap-1">
+      <div className="flex flex-row gap-6">
+        <div className="w-1/4 flex flex-col gap-6">
           {columns[0].map((img) => (
             <div
               key={img.id}
