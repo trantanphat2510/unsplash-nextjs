@@ -115,7 +115,7 @@ export default function MasonryPhotoGrid() {
           ))}
         </div>
 
-        <div className="w-2/5 flex flex-col gap-1">
+        <div className="w-2/5 flex flex-col gap-6">
           {columns[1].map((img) => (
             <div
               key={img.id}
@@ -135,7 +135,7 @@ export default function MasonryPhotoGrid() {
           ))}
         </div>
 
-        <div className="w-[35%] flex flex-col gap-1">
+        <div className="w-[35%] flex flex-col gap-6">
           {columns[2].map((img) => (
             <div
               key={img.id}
