@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { Menu } from "lucide-react"
-import UnsplashLogo from "@/components/ui/unsplash-logo"
-import SearchBar from "@/components/ui/search-bar"
+import Link from "next/link";
+import { Menu } from "lucide-react";
+import UnsplashLogo from "@/components/ui/unsplash-logo";
+import SearchBar from "@/components/ui/search-bar";
 
 export default function Header() {
   return (
@@ -21,22 +21,31 @@ export default function Header() {
 
         {/* Navigation Links */}
         <nav className="flex items-center ml-4 space-x-5">
-          <Link href="/explore" className="hidden md:block text-sm font-medium">
+          <Link
+            href="/explore"
+            className="hidden md:block text-sm font-medium text-gray-600"
+          >
             Explore
           </Link>
-          <Link href="/advertise" className="hidden md:block text-sm font-medium">
+          <Link
+            href="/advertise"
+            className="hidden md:block text-sm font-medium text-gray-600"
+          >
             Advertise
           </Link>
           <Link href="/plus" className="hidden md:block text-sm font-medium">
             Get Unsplash+
           </Link>
           <div className="h-5 w-px bg-gray-200 hidden md:block"></div>
-          <Link href="/login" className="hidden md:block text-sm font-medium">
+          <Link
+            href="/login"
+            className="hidden md:block text-sm font-medium text-gray-600"
+          >
             Log in
           </Link>
           <Link
             href="/join"
-            className="hidden md:block text-sm font-medium border border-gray-300 rounded-md px-3 py-1.5"
+            className="hidden md:block text-sm font-medium border text-gray-600 rounded-md px-3 py-1.5"
           >
             Submit an image
           </Link>
@@ -46,5 +55,5 @@ export default function Header() {
         </nav>
       </div>
     </header>
-  )
+  );
 }
