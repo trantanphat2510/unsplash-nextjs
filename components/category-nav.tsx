@@ -30,7 +30,6 @@ export default function CategoryNav() {
     "Experimental",
   ];
 
-  // ✅ Hàm xử lý tên danh mục từ pathname
   const getInitialCategory = () => {
     if (pathname === "/") return "Photos";
     if (pathname === "/illustrations") return "Illustrations";
@@ -40,6 +39,9 @@ export default function CategoryNav() {
         .replace("/t/", "")
         .replace(/-and-/g, " & ")
         .replace(/-/g, " ");
+
+      if (slug.toLowerCase() === "wallpapers") return "Wallpapers";
+
       return slug
         .split(" ")
         .map((s) => s.charAt(0).toUpperCase() + s.slice(1))

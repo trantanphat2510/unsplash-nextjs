@@ -1,14 +1,19 @@
-import Image from "next/image"
-import UnsplashLogo from "@/components/ui/unsplash-logo"
+import Image from "next/image";
+import UnsplashLogo from "@/components/ui/unsplash-logo";
 
 interface HeroSectionProps {
-  title: string
-  description: string
-  imageCredit?: string
-  imageSrc: string
+  title: string;
+  description: string;
+  imageCredit?: string;
+  imageSrc: string;
 }
 
-export default function HeroSection({ title, description, imageCredit, imageSrc }: HeroSectionProps) {
+export default function HeroSection({
+  title,
+  description,
+  imageCredit,
+  imageSrc,
+}: HeroSectionProps) {
   return (
     <div className="relative w-full md:w-1/2 bg-gray-900 text-white">
       <div className="absolute inset-0">
@@ -31,8 +36,12 @@ export default function HeroSection({ title, description, imageCredit, imageSrc 
           <p className="text-lg md:text-xl max-w-md">{description}</p>
         </div>
 
-        {imageCredit && <div className="text-sm text-gray-300 mt-8 md:mt-0">{imageCredit}</div>}
+        {imageCredit && (
+          <div className="text-sm text-gray-300 mt-8 md:mt-0">
+            {imageCredit}
+          </div>
+        )}
       </div>
     </div>
-  )
+  );
 }
