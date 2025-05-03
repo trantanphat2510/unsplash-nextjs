@@ -50,7 +50,7 @@ export default function SearchBar({
         placeholder={placeholder}
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
-        className="w-full py-2 pl-10 pr-4 text-gray-900 bg-gray-100 border-none rounded-lg focus:ring-2 focus:ring-amber-50 focus:bg-white focus:outline-none transition-all duration-200"
+        className="w-full py-3 pl-10 pr-4 text-gray-900 bg-gray-100 border-none rounded-lg focus:ring-2 focus:ring-amber-50 focus:bg-white focus:outline-none transition-all duration-200"
         style={{
           ...customHeightStyle,
           paddingLeft: `calc(${iconSize}px + 1rem)`, // icon width + padding

@@ -1,63 +1,58 @@
-"use client"
+"use client";
 
-import { useState, useRef, useEffect } from "react"
-import { cn } from "@/lib/utils"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { useState, useRef, useEffect } from "react";
+import { cn } from "@/lib/utils";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function CategoryNav() {
-  const [activeCategory, setActiveCategory] = useState("Photos")
-  const [showLeftArrow, setShowLeftArrow] = useState(false)
-  const [showRightArrow, setShowRightArrow] = useState(true)
+  const [activeCategory, setActiveCategory] = useState("Photos");
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
 
-  const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const featuredCategories = [
     { name: "Photos", featured: true },
     { name: "Illustrations", featured: true },
     { name: "Unsplash+", featured: true },
-  ]
+  ];
 
   const otherCategories = [
     { name: "Wallpapers" },
     { name: "Nature" },
     { name: "3D Renders" },
     { name: "Textures" },
-    { name: "Architecture & Interiors" },
     { name: "Travel" },
     { name: "Film" },
-    { name: "Street Photography" },
     { name: "People" },
-    { name: "Animals" },
+    { name: "Architecture & Interiors" },
+    { name: "Street Photography" },
     { name: "Experimental" },
-    { name: "Fashion & Beauty" },
-    { name: "Food & Drink" },
-    { name: "Sports" },
-    { name: "Health & Wellness" },
-  ]
+  ];
 
   const checkScroll = () => {
-    if (!scrollContainerRef.current) return
+    if (!scrollContainerRef.current) return;
 
-    const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current
-    setShowLeftArrow(scrollLeft > 0)
-    setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10)
-  }
+    const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+    setShowLeftArrow(scrollLeft > 0);
+    setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10);
+  };
 
   useEffect(() => {
-    checkScroll()
-    window.addEventListener("resize", checkScroll)
-    return () => window.removeEventListener("resize", checkScroll)
-  }, [])
+    checkScroll();
+    window.addEventListener("resize", checkScroll);
+    return () => window.removeEventListener("resize", checkScroll);
+  }, []);
 
   const scrollLeft = () => {
-    if (!scrollContainerRef.current) return
-    scrollContainerRef.current.scrollBy({ left: -200, behavior: "smooth" })
-  }
+    if (!scrollContainerRef.current) return;
+    scrollContainerRef.current.scrollBy({ left: -200, behavior: "smooth" });
+  };
 
   const scrollRight = () => {
-    if (!scrollContainerRef.current) return
-    scrollContainerRef.current.scrollBy({ left: 200, behavior: "smooth" })
-  }
+    if (!scrollContainerRef.current) return;
+    scrollContainerRef.current.scrollBy({ left: 200, behavior: "smooth" });
+  };
 
   return (
     <div className="relative border-b border-gray-200">
@@ -89,7 +84,7 @@ export default function CategoryNav() {
                 activeCategory === category.name
                   ? "text-black border-b-2 border-black -mb-[1px]"
                   : "text-gray-500 hover:text-gray-900",
-                category.featured ? "font-semibold" : "",
+                category.featured ? "font-semibold" : ""
               )}
             >
               {category.name}
@@ -107,7 +102,7 @@ export default function CategoryNav() {
                 "text-sm font-medium transition-colors",
                 activeCategory === category.name
                   ? "text-black border-b-2 border-black -mb-[1px]"
-                  : "text-gray-500 hover:text-gray-900",
+                  : "text-gray-500 hover:text-gray-900"
               )}
             >
               {category.name}
@@ -127,5 +122,5 @@ export default function CategoryNav() {
         </button>
       )}
     </div>
-  )
+  );
 }
