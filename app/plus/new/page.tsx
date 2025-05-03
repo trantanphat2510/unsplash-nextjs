@@ -25,10 +25,10 @@ export default function Home() {
           <IllustrationCard />
         </div>
         <div className="flex-1">
-          <Collections collections={sampleData} />
+          <TagList />
         </div>
         <div className="flex-1">
-          <TagList />
+          <Collections collections={sampleData} />
         </div>
       </div>
       <div className="mt-10">

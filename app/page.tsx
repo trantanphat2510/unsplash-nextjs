@@ -1,5 +1,3 @@
-import Header from "@/components/layout/header";
-import CategoryNav from "@/components/category-nav";
 import PhotoGrid from "@/components/homepage/PhotoGrid";
 import { HomeHeader } from "@/components/homepage/HomeHeader/HomeHeader";
 import Collections from "@/components/homepage/Collections/Collections";
@@ -19,11 +17,7 @@ const sampleData1 = [
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <div className="w-full fixed top-0 left-0 right-0 bg-white shadow-md z-50">
-        <Header />
-        <CategoryNav />
-      </div>
-      <div className="flex justify-center gap-6 px-4 max-w-7xl mx-auto mt-40">
+      <div className="flex justify-center gap-6 px-4 max-w-7xl mx-auto mt-">
         <div className="flex-2">
           <HomeHeader />
         </div>

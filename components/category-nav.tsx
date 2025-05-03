@@ -1,38 +1,74 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function CategoryNav() {
-  const [activeCategory, setActiveCategory] = useState("Photos");
-  const [showLeftArrow, setShowLeftArrow] = useState(false);
-  const [showRightArrow, setShowRightArrow] = useState(true);
+  const router = useRouter();
+  const pathname = usePathname();
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const featuredCategories = [
-    { name: "Photos", featured: true },
-    { name: "Illustrations", featured: true },
-    { name: "Unsplash+", featured: true },
+    { name: "Photos", path: "/" },
+    { name: "Illustrations", path: "/illustrations" },
+    { name: "Unsplash+", path: "/plus/new" },
   ];
 
   const otherCategories = [
-    { name: "Wallpapers" },
-    { name: "Nature" },
-    { name: "3D Renders" },
-    { name: "Textures" },
-    { name: "Travel" },
-    { name: "Film" },
-    { name: "People" },
-    { name: "Architecture & Interiors" },
-    { name: "Street Photography" },
-    { name: "Experimental" },
+    "Wallpapers",
+    "Nature",
+    "3D Renders",
+    "Textures",
+    "Travel",
+    "Film",
+    "People",
+    "Architecture & Interiors",
+    "Street Photography",
+    "Experimental",
   ];
+
+  // ✅ Hàm xử lý tên danh mục từ pathname
+  const getInitialCategory = () => {
+    if (pathname === "/") return "Photos";
+    if (pathname === "/illustrations") return "Illustrations";
+    if (pathname === "/plus/new") return "Unsplash+";
+    if (pathname?.startsWith("/t/")) {
+      const slug = pathname
+        .replace("/t/", "")
+        .replace(/-and-/g, " & ")
+        .replace(/-/g, " ");
+      return slug
+        .split(" ")
+        .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+        .join(" ");
+    }
+    return "Photos";
+  };
+
+  const [activeCategory, setActiveCategory] = useState(getInitialCategory);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
+
+  const handleCategoryClick = (name: string, path?: string) => {
+    setActiveCategory(name);
+
+    if (path) {
+      router.push(path);
+    } else {
+      const slug = name
+        .toLowerCase()
+        .replace(/ & /g, "-and-")
+        .replace(/ /g, "-")
+        .replace(/[^\w-]+/g, "");
+      router.push(`/t/${slug}`);
+    }
+  };
 
   const checkScroll = () => {
     if (!scrollContainerRef.current) return;
-
     const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
     setShowLeftArrow(scrollLeft > 0);
     setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10);
@@ -56,7 +92,6 @@ export default function CategoryNav() {
 
   return (
     <div className="relative border-b border-gray-200">
-      {/* Left Arrow */}
       {showLeftArrow && (
         <button
           onClick={scrollLeft}
@@ -67,37 +102,16 @@ export default function CategoryNav() {
         </button>
       )}
 
-      {/* Categories */}
       <div
         ref={scrollContainerRef}
         className="flex whitespace-nowrap px-4 py-3 overflow-x-auto scrollbar-hide"
         onScroll={checkScroll}
       >
-        {/* Featured Categories */}
         <div className="flex gap-6 border-r border-gray-200 pr-6">
           {featuredCategories.map((category) => (
             <button
               key={category.name}
-              onClick={() => setActiveCategory(category.name)}
-              className={cn(
-                "text-sm font-medium transition-colors",
-                activeCategory === category.name
-                  ? "text-black border-b-2 border-black -mb-[1px]"
-                  : "text-gray-500 hover:text-gray-900",
-                category.featured ? "font-semibold" : ""
-              )}
-            >
-              {category.name}
-            </button>
-          ))}
-        </div>
-
-        {/* Other Categories */}
-        <div className="flex gap-6 pl-6">
-          {otherCategories.map((category) => (
-            <button
-              key={category.name}
-              onClick={() => setActiveCategory(category.name)}
+              onClick={() => handleCategoryClick(category.name, category.path)}
               className={cn(
                 "text-sm font-medium transition-colors",
                 activeCategory === category.name
@@ -109,9 +123,25 @@ export default function CategoryNav() {
             </button>
           ))}
         </div>
+
+        <div className="flex gap-6 pl-6">
+          {otherCategories.map((name) => (
+            <button
+              key={name}
+              onClick={() => handleCategoryClick(name)}
+              className={cn(
+                "text-sm font-medium transition-colors",
+                activeCategory === name
+                  ? "text-black border-b-2 border-black -mb-[1px]"
+                  : "text-gray-500 hover:text-gray-900"
+              )}
+            >
+              {name}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* Right Arrow */}
       {showRightArrow && (
         <button
           onClick={scrollRight}
