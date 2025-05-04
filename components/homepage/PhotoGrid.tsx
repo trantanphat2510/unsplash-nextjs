@@ -89,7 +89,7 @@ export default function MasonryPhotoGrid() {
   }, [page, loading]);
 
   if (images.length === 0 && !loading) {
-    return <div className="text-center py-8">No images to display</div>;
+    return <div className="text-center py-8"></div>;
   }
 
   return (
@@ -112,7 +112,10 @@ export default function MasonryPhotoGrid() {
                   src={img.src}
                   alt={img.alt}
                   fill
-                  className="object-cover"
+                  className="object-cover opacity-0 transition-opacity duration-700 group-hover:scale-105 group-hover:opacity-100"
+                  onLoadingComplete={(imgEl) => {
+                    imgEl.classList.remove("opacity-0");
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent p-4 flex flex-col justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <ImageOverlay
@@ -128,8 +131,8 @@ export default function MasonryPhotoGrid() {
       </div>
 
       {loading && (
-        <div className="w-full py-4 text-center">
-          <p>Loading more images...</p>
+        <div className="w-full py-6 flex justify-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-900"></div>
         </div>
       )}
     </div>

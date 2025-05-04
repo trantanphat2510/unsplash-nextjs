@@ -17,7 +17,7 @@ const sampleData = [
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <div className="flex justify-center gap-6 px-4 max-w-7xl mx-auto mt-">
+      <div className="flex justify-center gap-6 px-4 max-w-7xl mx-auto mt-30">
         <div className="flex-1">
           <Collections collections={sampleData} />
         </div>

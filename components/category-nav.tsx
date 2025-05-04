@@ -106,40 +106,50 @@ export default function CategoryNav() {
 
       <div
         ref={scrollContainerRef}
-        className="flex whitespace-nowrap px-4 py-3 overflow-x-auto scrollbar-hide"
+        className="flex whitespace-nowrap px-5 py-3 overflow-x-auto scrollbar-hide"
         onScroll={checkScroll}
       >
-        <div className="flex gap-6 border-r border-gray-200 pr-6">
+        <div className="flex gap-5 border-r border-gray-200 pr-5">
           {featuredCategories.map((category) => (
-            <button
-              key={category.name}
-              onClick={() => handleCategoryClick(category.name, category.path)}
-              className={cn(
-                "text-sm font-medium transition-colors",
-                activeCategory === category.name
-                  ? "text-black border-b-2 border-black -mb-[1px]"
-                  : "text-gray-500 hover:text-gray-900"
+            <div key={category.name} className="relative pb-3">
+              <button
+                onClick={() =>
+                  handleCategoryClick(category.name, category.path)
+                }
+                className={cn(
+                  "text-sm font-medium transition-colors",
+                  activeCategory === category.name
+                    ? "text-black"
+                    : "text-gray-500 hover:text-gray-900"
+                )}
+              >
+                {category.name}
+              </button>
+              {activeCategory === category.name && (
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-black"></div>
               )}
-            >
-              {category.name}
-            </button>
+            </div>
           ))}
         </div>
 
         <div className="flex gap-6 pl-6">
           {otherCategories.map((name) => (
-            <button
-              key={name}
-              onClick={() => handleCategoryClick(name)}
-              className={cn(
-                "text-sm font-medium transition-colors",
-                activeCategory === name
-                  ? "text-black border-b-2 border-black -mb-[1px]"
-                  : "text-gray-500 hover:text-gray-900"
+            <div key={name} className="relative pb-3">
+              <button
+                onClick={() => handleCategoryClick(name)}
+                className={cn(
+                  "text-sm font-medium transition-colors",
+                  activeCategory === name
+                    ? "text-black"
+                    : "text-gray-500 hover:text-gray-900"
+                )}
+              >
+                {name}
+              </button>
+              {activeCategory === name && (
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-black"></div>
               )}
-            >
-              {name}
-            </button>
+            </div>
           ))}
         </div>
       </div>

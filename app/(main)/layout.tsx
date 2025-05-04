@@ -25,7 +25,7 @@ export default function RootLayout({
           <Header />
           <CategoryNav />
         </div>
-        <main className="mt-40 px-4 max-w-7xl mx-auto min-h-screen">
+        <main className="mt-50 px-4 max-w-7xl mx-auto min-h-screen">
           {children}
         </main>
       </body>
