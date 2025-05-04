@@ -1,6 +1,6 @@
-import PhotoGrid from "@/components/homepage/PhotoGrid";
-import { HomeHeader } from "@/components/homepage/HomeHeader/HomeHeader";
 import Collections from "@/components/homepage/Collections/Collections";
+import { HomeHeader } from "@/components/homepage/HomeHeader/HomeHeader";
+import MasonryPhotoGrid from "@/components/homepage/PhotoGrid";
 import TagList from "@/components/homepage/Tag/TagList";
 
 const sampleData1 = [
@@ -17,7 +17,7 @@ const sampleData1 = [
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <div className="flex justify-center gap-6 px-4 max-w-7xl mx-auto mt-">
+      <div className="flex justify-center gap-6 px-4 max-w-7xl mx-auto mt-8">
         <div className="flex-2">
           <HomeHeader />
         </div>
@@ -29,7 +29,7 @@ export default function Home() {
         </div>
       </div>
       <div className="mt-10">
-        <PhotoGrid />
+        <MasonryPhotoGrid />
       </div>
     </main>
   );

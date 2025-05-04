@@ -8,6 +8,7 @@ interface ImageItem {
   alt: string;
   width: number;
   height: number;
+  author: string;
 }
 
 const getImageDimensions = async (imagePath: string) => {
@@ -26,10 +27,8 @@ export async function GET(request: Request) {
   const page = searchParams.get("page") || "1";
   const limit = searchParams.get("limit") || "20";
 
-  // Dữ liệu ảnh giả lập với chiều rộng và chiều cao thực tế
   const images: ImageItem[] = [];
 
-  // Giả sử bạn có ảnh trong thư mục 'public/images/'
   for (let i = 0; i < 1000; i++) {
     const imagePath = path.resolve(
       "public",
@@ -44,10 +43,10 @@ export async function GET(request: Request) {
       alt: `Image ${i + 1}`,
       width,
       height,
+      author: `Photographer ${i + 1}`,
     });
   }
 
-  // Phân trang
   const startIndex = (parseInt(page) - 1) * parseInt(limit);
   const endIndex = startIndex + parseInt(limit);
   const selectedImages = images.slice(startIndex, endIndex);

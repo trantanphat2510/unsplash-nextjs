@@ -1,9 +1,8 @@
-// app/components/MasonryPhotoGrid.tsx
-
 "use client";
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { ImageOverlay } from "./ImageOverlay/ImageOverlay";
 
 interface ImageItem {
   id: string;
@@ -11,6 +10,7 @@ interface ImageItem {
   alt: string;
   width: number;
   height: number;
+  author: string;
 }
 
 const fetchImages = async (page = 1, limit = 30): Promise<ImageItem[]> => {
@@ -95,65 +95,36 @@ export default function MasonryPhotoGrid() {
   return (
     <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex flex-row gap-6">
-        <div className="w-1/4 flex flex-col gap-6">
-          {columns[0].map((img) => (
-            <div
-              key={img.id}
-              className="w-full relative aspect-w-1 aspect-h-1"
-              style={{
-                aspectRatio: `${img.width} / ${img.height}`, // Giữ tỷ lệ đúng
-              }}
-            >
-              <Image
-                src={img.src}
-                alt={img.alt}
-                width={img.width}
-                height={img.height}
-                className="absolute top-0 left-0 w-full h-full object-cover"
-              />
-            </div>
-          ))}
-        </div>
-
-        <div className="w-2/5 flex flex-col gap-6">
-          {columns[1].map((img) => (
-            <div
-              key={img.id}
-              className="w-full relative aspect-w-1 aspect-h-1"
-              style={{
-                aspectRatio: `${img.width} / ${img.height}`, // Giữ tỷ lệ đúng
-              }}
-            >
-              <Image
-                src={img.src}
-                alt={img.alt}
-                width={img.width}
-                height={img.height}
-                className="absolute top-0 left-0 w-full h-full object-cover"
-              />
-            </div>
-          ))}
-        </div>
-
-        <div className="w-[35%] flex flex-col gap-6">
-          {columns[2].map((img) => (
-            <div
-              key={img.id}
-              className="w-full relative aspect-w-1 aspect-h-1"
-              style={{
-                aspectRatio: `${img.width} / ${img.height}`, // Giữ tỷ lệ đúng
-              }}
-            >
-              <Image
-                src={img.src}
-                alt={img.alt}
-                width={img.width}
-                height={img.height}
-                className="absolute top-0 left-0 w-full h-full object-cover"
-              />
-            </div>
-          ))}
-        </div>
+        {columns.map((column, colIndex) => (
+          <div
+            key={colIndex}
+            className={`flex flex-col gap-6 ${
+              colIndex === 0 ? "w-1/4" : colIndex === 1 ? "w-2/5" : "w-[35%]"
+            }`}
+          >
+            {column.map((img) => (
+              <div
+                key={img.id}
+                className="w-full relative group rounded-lg overflow-hidden"
+                style={{ aspectRatio: `${img.width} / ${img.height}` }}
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent p-4 flex flex-col justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <ImageOverlay
+                    avatarUrl="https://scontent.fsgn2-4.fna.fbcdn.net/v/t39.30808-6/473014024_615558860860795_7312029901608913680_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=KrTcIuMzRBwQ7kNvwH3k6SH&_nc_oc=Adm8qyLuCM2lG5jTuYXMli6HHIen6H1n2wsbqNKkP0qb_dChK7yT5aLVcxrtbVO38Dw&_nc_zt=23&_nc_ht=scontent.fsgn2-4.fna&_nc_gid=O8JHaP1S48jLRb3pY7BE_A&oh=00_AfHwM_6kQGuFNK0XLZTVcLFg6jGrLNzVrzFh_opzEtVdUw&oe=681CE04C"
+                    description="Tran Tan Phat"
+                    author="For Unsplash+"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
 
       {loading && (
