@@ -11,7 +11,7 @@ interface ImageOverlayProps {
 export const ImageOverlay: React.FC<ImageOverlayProps> = ({
   description,
   author,
-  avatarUrl,
+  avatarUrl = "https://inkythuatso.com/uploads/thumbnails/800/2022/03/anh-dai-dien-facebook-dep-cho-nam-53-28-16-28-17.jpg",
 }) => {
   return (
     <div className="absolute inset-0 p-4 flex flex-col justify-between">

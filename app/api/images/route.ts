@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import sharp from "sharp";
 import path from "path";
 
-interface ImageItem {
+export interface ImageItem {
   id: string;
   src: string;
   alt: string;
