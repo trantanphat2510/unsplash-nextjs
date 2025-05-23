@@ -19,7 +19,8 @@ export default function MasonryPhotoGrid() {
   const [columns, setColumns] = useState<
     [ImageItem[], ImageItem[], ImageItem[]]
   >([[], [], []]);
-  const [selectedImage, setSelectedImage] = useState<ImageItem | null>(null); // 💡 modal state
+  const [selectedImage, setSelectedImage] = useState<ImageItem | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0); // State for navigation
 
   useEffect(() => {
     const loadInitialImages = async () => {
@@ -43,14 +44,17 @@ export default function MasonryPhotoGrid() {
       const colHeights = [0, 0, 0];
 
       images.forEach((img) => {
+        // Tính chiều cao tỷ lệ để phân bổ cột
         const shortestColIndex = colHeights.indexOf(Math.min(...colHeights));
         cols[shortestColIndex].push(img);
         colHeights[shortestColIndex] += img.height / img.width;
       });
 
       setColumns(cols);
+    } else {
+      setColumns([[], [], []]);
     }
-  }, [images]);
+  }, [currentImageIndex, images]);
 
   const loadMoreImages = async () => {
     if (!loading) {
@@ -82,6 +86,15 @@ export default function MasonryPhotoGrid() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [page, loading]);
 
+  // Handle image click to set both selected image and index
+  const handleImageClick = (image: ImageItem) => {
+    const index = images.findIndex((img) => img.id === image.id); // Use id for reliable index lookup
+    if (index !== -1) {
+      setSelectedImage(image);
+      setCurrentImageIndex(index);
+    }
+  };
+
   return (
     <>
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -98,7 +111,7 @@ export default function MasonryPhotoGrid() {
                   key={img.id}
                   className="w-full relative group rounded-lg overflow-hidden cursor-pointer"
                   style={{ aspectRatio: `${img.width} / ${img.height}` }}
-                  onClick={() => setSelectedImage(img)} // 💡 mở modal
+                  onClick={() => handleImageClick(img)} // Simplified to use handleImageClick
                 >
                   <Image
                     src={img.src}
@@ -133,6 +146,20 @@ export default function MasonryPhotoGrid() {
         <ImageModal
           image={selectedImage}
           onClose={() => setSelectedImage(null)}
+          onPrevious={() =>
+            setCurrentImageIndex((prev) => {
+              const newIndex = Math.max(prev - 1, 0);
+              setSelectedImage(images[newIndex] || null); // Fallback to null if index is invalid
+              return newIndex;
+            })
+          }
+          onNext={() =>
+            setCurrentImageIndex((prev) => {
+              const newIndex = Math.min(prev + 1, images.length - 1);
+              setSelectedImage(images[newIndex] || null); // Fallback to null if index is invalid
+              return newIndex;
+            })
+          }
         />
       )}
     </>
