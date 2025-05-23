@@ -1,14 +1,13 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function CategoryNav() {
-  const router = useRouter();
   const pathname = usePathname();
-
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const featuredCategories = [
@@ -39,9 +38,6 @@ export default function CategoryNav() {
         .replace("/t/", "")
         .replace(/-and-/g, " & ")
         .replace(/-/g, " ");
-
-      if (slug.toLowerCase() === "wallpapers") return "Wallpapers";
-
       return slug
         .split(" ")
         .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
@@ -53,21 +49,6 @@ export default function CategoryNav() {
   const [activeCategory, setActiveCategory] = useState(getInitialCategory);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
-
-  const handleCategoryClick = (name: string, path?: string) => {
-    setActiveCategory(name);
-
-    if (path) {
-      router.push(path);
-    } else {
-      const slug = name
-        .toLowerCase()
-        .replace(/ & /g, "-and-")
-        .replace(/ /g, "-")
-        .replace(/[^\w-]+/g, "");
-      router.push(`/t/${slug}`);
-    }
-  };
 
   const checkScroll = () => {
     if (!scrollContainerRef.current) return;
@@ -83,13 +64,20 @@ export default function CategoryNav() {
   }, []);
 
   const scrollLeft = () => {
-    if (!scrollContainerRef.current) return;
-    scrollContainerRef.current.scrollBy({ left: -200, behavior: "smooth" });
+    scrollContainerRef.current?.scrollBy({ left: -200, behavior: "smooth" });
   };
 
   const scrollRight = () => {
-    if (!scrollContainerRef.current) return;
-    scrollContainerRef.current.scrollBy({ left: 200, behavior: "smooth" });
+    scrollContainerRef.current?.scrollBy({ left: 200, behavior: "smooth" });
+  };
+
+  const getSlugPath = (name: string) => {
+    const slug = name
+      .toLowerCase()
+      .replace(/ & /g, "-and-")
+      .replace(/ /g, "-")
+      .replace(/[^\w-]+/g, "");
+    return `/t/${slug}`;
   };
 
   return (
@@ -112,10 +100,9 @@ export default function CategoryNav() {
         <div className="flex gap-5 border-r border-gray-200 pr-5">
           {featuredCategories.map((category) => (
             <div key={category.name} className="relative pb-3">
-              <button
-                onClick={() =>
-                  handleCategoryClick(category.name, category.path)
-                }
+              <Link
+                href={category.path}
+                onClick={() => setActiveCategory(category.name)}
                 className={cn(
                   "text-sm font-medium transition-colors",
                   activeCategory === category.name
@@ -124,7 +111,7 @@ export default function CategoryNav() {
                 )}
               >
                 {category.name}
-              </button>
+              </Link>
               {activeCategory === category.name && (
                 <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-black"></div>
               )}
@@ -135,8 +122,9 @@ export default function CategoryNav() {
         <div className="flex gap-6 pl-6">
           {otherCategories.map((name) => (
             <div key={name} className="relative pb-3">
-              <button
-                onClick={() => handleCategoryClick(name)}
+              <Link
+                href={getSlugPath(name)}
+                onClick={() => setActiveCategory(name)}
                 className={cn(
                   "text-sm font-medium transition-colors",
                   activeCategory === name
@@ -145,7 +133,7 @@ export default function CategoryNav() {
                 )}
               >
                 {name}
-              </button>
+              </Link>
               {activeCategory === name && (
                 <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-black"></div>
               )}

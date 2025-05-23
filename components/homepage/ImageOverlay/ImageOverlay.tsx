@@ -41,12 +41,6 @@ export const ImageOverlay: React.FC<ImageOverlayProps> = ({
             <p className="text-xs opacity-90">{author}</p>
           </div>
         </div>
-        {/* Bottom section - Download button */}
-        {/* <div className="flex justify-between items-end">
-        <div className="text-white">
-          <p className="text-sm font-medium">{description}</p>
-          <p className="text-sm opacity-90">{author}</p>
-        </div> */}
 
         <button className="flex items-center gap-1 bg-gray-100 shadow-md text-gray-600 px-3 py-2 rounded-lg hover:opacity-90 transition-all text-sm">
           <FiDownload className="w-4 h-4 text-gray-600" />
